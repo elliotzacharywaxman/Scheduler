@@ -1,7 +1,15 @@
+:root {
+  --main-color: red;
+  --secondary: pink;
+  --teriary: blue;
+
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  /* background-color:var(--main-color); */
 }
 
 textarea{
@@ -69,3 +77,4 @@ textarea{
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
+
