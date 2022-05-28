@@ -4,12 +4,6 @@ function setTime(){
 }    
 setInterval(setTime, 1000);
 
-{/* <tr>
-<td>9:00am</td>
-<td><textarea></textarea></td>
-<td><button class="saveBtn fa fa-folder"></button></td>
-</tr> */}
-
 var tbodyEl = document.getElementsByClassName("bodyOn")
 console.log(tbodyEl)
 
@@ -19,21 +13,50 @@ var hours = 18
 
 
 var renderRows = () => {
+    var momentHour = moment().hours()
+    console.log(momentHour)
     $("bodyOn").html("");
-    for (i = 10; i < hours; i++){
+    for (i = 9; i < hours; i++){
+        var hourDisplay = ""
+        if (i<12){
+            hourDisplay = i+":00am"
+        } else if (i === 12){
+            hourDisplay = i+":00pm"
+        } else {
+            hourDisplay = i -12 +":00pm"
+        }
+        var colorKey = "";
+        if (i<momentHour){
+            colorKey = "past"
+        } else if (i === momentHour){
+            colorKey = "present"
+        } else {
+            colorKey = "future"
+        }
         var tableRowContainer = $("<tr>");
-        var hourData = $("<td>")
-        var eventData = $("<td>")
-        var event = $("<textarea>")
+        tableRowContainer.attr("id",i)
+        var hourData = $("<td>").addClass(colorKey)
+        var eventData = $("<td>").addClass("event")
+        var event = $("<textarea>").val(localStorage.getItem(i))
         var btnSq = $("<td>")
-        var saveBtn = $("<button>")
+        var saveBtn = $("<button>").addClass("saveBtn").addClass("fa fa-folder")
+        saveBtn.on("click", function (){
+            var hourKey = $(this).parent().parent().attr('id');
+            console.log(hourKey)
+            var activity = $(this).parent().siblings(".event").children().val()
+            localStorage.setItem(hourKey, activity)
+        })
         
-        hourData.text(i)
+
+
+
+        hourData.text(hourDisplay)
         hourData.appendTo(tableRowContainer);
         eventData.appendTo(tableRowContainer);
         event.appendTo(eventData);
         btnSq.appendTo(tableRowContainer);
         saveBtn.appendTo(btnSq);
+        
 
         
 
