@@ -39,7 +39,7 @@ var renderRows = () => {
         var eventData = $("<td>").addClass("event")
         var event = $("<textarea>").val(localStorage.getItem(i))
         var btnSq = $("<td>")
-        var saveBtn = $("<button>").addClass("saveBtn").addClass("fa fa-folder")
+        var saveBtn = $("<button>").addClass("saveBtn").addClass("fa fa-folder fa-lg")
         saveBtn.on("click", function (){
             var hourKey = $(this).parent().parent().attr('id');
             console.log(hourKey)
